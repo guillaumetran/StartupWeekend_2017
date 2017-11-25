@@ -25,6 +25,7 @@ export default class App extends React.Component {
     }
     return (
       <View style={styles.container}>
+        <View style={styles.header} />
         {this.state.page}
         <TabBar selectPage={page => this.setState({ page: page })} />
       </View>
@@ -36,5 +37,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F8F8F8"
+  },
+  header: {
+    flex: 0.05,
   }
 });
