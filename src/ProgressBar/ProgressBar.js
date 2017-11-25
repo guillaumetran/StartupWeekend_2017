@@ -28,11 +28,9 @@ export default class ProgressBar extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        flexDirection: "row"
     },
     bar: {
-        flex: 0.9,
+        flex: 0.3,
         height: barHeight,
         backgroundColor: "#fff",
         borderRadius: 15,
