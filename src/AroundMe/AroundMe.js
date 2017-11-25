@@ -14,6 +14,8 @@ import {
 import { MapView, Constants, Location, Permissions } from "expo";
 import Loader from "../Shared/Loader";
 import ReductionImage from "../Shared/ReductionImage";
+import CardModal from "../Shared/CardModal";
+import ModalLine from "../Shared/ModalLine";
 
 const { width, height } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.75;
@@ -54,7 +56,7 @@ export default class AroundMe extends React.Component {
     animation: new Animated.Value(0),
     location: null,
     index: 0,
-    restaurant: null,
+    reductionModal: false,
     error: false
   };
 
@@ -171,6 +173,7 @@ export default class AroundMe extends React.Component {
                     <TouchableOpacity
                       style={{ flex: 0.95 }}
                       activeOpacity={0.8}
+                      onPress={() => this.setState({ reductionModal: true })}
                     >
                       <ReductionImage
                         image={item.image}
@@ -184,6 +187,30 @@ export default class AroundMe extends React.Component {
             );
           })}
         </Animated.ScrollView>
+        <CardModal
+          swipeArea={height / 3}
+          swipeThreshold={50}
+          isOpen={this.state.reductionModal}
+          onClosed={() => this.setState({ reductionModal: false })}
+          headerSize={0.25}
+          backdropOpacity={0.9}
+          header={
+            <View style={{ flex: 0.25, backgroundColor: "transparent" }}>
+              <ModalLine />
+            </View>
+          }
+          backdropContent={
+            <View style={{ flex: 0.24, backgroundColor: "transparent" }}>
+              <ReductionImage
+                image={require("../assets/images/kfc.jpg")}
+                date={true}
+                title="KFC"
+              />
+            </View>
+          }
+        >
+          <Text style={{ marginTop: 20 }}>OUIIII</Text>
+        </CardModal>
       </View>
     );
   }
