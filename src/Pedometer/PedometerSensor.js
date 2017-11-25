@@ -61,7 +61,7 @@ export default class PedometerSensor extends React.Component {
     }
 
     componentWillUnmount() {
-        // this._unsubscribe();
+        this._unsubscribe();
     }
 
     _onRefresh() {
@@ -109,7 +109,7 @@ export default class PedometerSensor extends React.Component {
                         <ProgressBar percentage={this.state.currentStepCount / 3}/>
                         <View style={styles.separator}/>
                         <View style={styles.textPlacement}>
-                            <Text style={styles.description}> {this.state.currentStepCount}m/200m</Text>
+                            <Text> {this.state.currentStepCount}m/300m</Text>
                         </View>
                     </View>
 
