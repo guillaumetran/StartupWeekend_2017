@@ -2,14 +2,56 @@
  * Created by guillaumetran on 25/11/2017.
  */
 import React from "react";
-import { StyleSheet, Text, View, Dimensions, Platform } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  Platform,
+  Animated,
+  TouchableOpacity
+} from "react-native";
 import { MapView, Constants, Location, Permissions } from "expo";
 import Loader from "../Shared/Loader";
+import ReductionImage from "../Shared/ReductionImage";
 
 const { width, height } = Dimensions.get("window");
+const CARD_WIDTH = width * 0.75;
+const CARD_HEIGHT = height / 4;
+
+const reductions = [
+  {
+    title: "KFC",
+    description: "Opération 1000 pas 1 tenders",
+    image: require("../assets/images/kfc.jpg"),
+    coordinate: {
+      latitude: 48.5523076,
+      longitude: 7.7085868
+    }
+  },
+  {
+    title: "Burger King",
+    description: "Opération 1000 pas 1 tenders",
+    image: require("../assets/images/kfc.jpg"),
+    coordinate: {
+      latitude: 48.5649829,
+      longitude: 7.7319789
+    }
+  },
+  {
+    title: "Subway",
+    description: "Opération 1000 pas 1 Sub",
+    image: require("../assets/images/kfc.jpg"),
+    coordinate: {
+      latitude: 48.580594,
+      longitude: 7.7323268
+    }
+  }
+];
 
 export default class AroundMe extends React.Component {
   state = {
+    animation: new Animated.Value(0),
     location: null,
     index: 0,
     restaurant: null,
@@ -24,6 +66,28 @@ export default class AroundMe extends React.Component {
     } else {
       this._getLocationAsync();
     }
+  }
+
+  componentDidMount() {
+    this.state.animation.addListener(({ value }) => {
+      let index = Math.floor(value / CARD_WIDTH + 0.3);
+
+      clearTimeout(this.regionTimeout);
+      this.regionTimeout = setTimeout(() => {
+        if (this.state.index !== index) {
+          const { coordinate } = reductions[index];
+          this.map.animateToRegion(
+            {
+              ...coordinate,
+              latitudeDelta: 0.0122,
+              longitudeDelta: 0.0122
+            },
+            350
+          );
+          this.setState({ index });
+        }
+      }, 10);
+    });
   }
 
   _getLocationAsync = async () => {
@@ -54,7 +118,72 @@ export default class AroundMe extends React.Component {
             longitudeDelta: 0.0122
           }}
           customMapStyle={mapStyle}
-        />
+        >
+          {reductions.map((item, index) => {
+            return (
+              <MapView.Marker
+                key={index}
+                coordinate={item.coordinate}
+                onPress={() => {
+                  this.refs.scrollView._component.scrollTo({
+                    x: index * (CARD_WIDTH + 10),
+                    y: 0,
+                    animated: false
+                  });
+                }}
+              />
+            );
+          })}
+        </MapView>
+        <Animated.ScrollView
+          ref="scrollView"
+          horizontal
+          scrollEventThrottle={1}
+          showsHorizontalScrollIndicator={false}
+          snapToInterval={CARD_WIDTH}
+          snapToAlignment="start"
+          decelerationRate="fast"
+          style={styles.scrollView}
+          onScroll={Animated.event(
+            [
+              {
+                nativeEvent: {
+                  contentOffset: {
+                    x: this.state.animation
+                  }
+                }
+              }
+            ],
+            { useNativeDriver: true }
+          )}
+        >
+          {reductions.map((item, index) => {
+            return (
+              <View key={index} style={styles.card}>
+                <View style={{ flex: 1, justifyContent: "center" }}>
+                  <View
+                    style={{
+                      flex: 0.95,
+                      justifyContent: "center",
+                      flexDirection: "row"
+                    }}
+                  >
+                    <TouchableOpacity
+                      style={{ flex: 0.95 }}
+                      activeOpacity={0.8}
+                    >
+                      <ReductionImage
+                        image={item.image}
+                        title={item.title}
+                        description={item.description}
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            );
+          })}
+        </Animated.ScrollView>
       </View>
     );
   }
@@ -64,6 +193,25 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#F8F8F8"
+  },
+  scrollView: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0
+  },
+  card: {
+    marginLeft: 10,
+    elevation: 2,
+    alignSelf: "center",
+    backgroundColor: "transparent",
+    shadowColor: "#000",
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    shadowOffset: { x: 2, y: -2 },
+    height: CARD_HEIGHT,
+    width: CARD_WIDTH,
+    overflow: "hidden"
   }
 });
 
