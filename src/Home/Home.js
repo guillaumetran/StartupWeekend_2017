@@ -45,49 +45,6 @@ export default class Home extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={{ flex: 1 }}>
-          <View
-            style={{
-              flex: 0.95,
-              justifyContent: "center"
-            }}
-          >
-            <View
-              style={{
-                flex: 0.95,
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexDirection: "row"
-              }}
-            >
-              <TouchableOpacity style={{ flex: 0.49 }}>
-                <View
-                  style={{ flex: 1, backgroundColor: "blue", borderRadius: 20 }}
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={{ flex: 0.49 }}>
-                <View
-                  style={{
-                    flex: 1,
-                    backgroundColor: "green",
-                    borderRadius: 20
-                  }}
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-        <View
-          style={{ flex: 1, alignItems: "center", justifyContent: "center" }}
-        >
-          <View style={{ flex: 0.95, flexDirection: "row" }}>
-            <TouchableOpacity style={{ flex: 0.95 }}>
-              <View
-                style={{ flex: 1, backgroundColor: "blue", borderRadius: 20 }}
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
         <CardModal
           swipeArea={height / 3}
           swipeThreshold={50}
