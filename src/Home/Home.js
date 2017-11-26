@@ -8,6 +8,7 @@ import {
     View,
     TouchableOpacity,
     Image,
+    Platform,
     Dimensions,
     Button
 } from "react-native";
@@ -21,8 +22,30 @@ const {height, width} = Dimensions.get("window");
 
 export default class Home extends React.Component {
     state = {
-        reductionModal: false
+        reductionModal: false,
+        location: null
     };
+
+    _getLocationAsync = async () => {
+        let { status } = await Permissions.askAsync(Permissions.LOCATION);
+        if (status !== "granted") {
+            this.setState({
+                error: true
+            });
+        }
+        let location = await Location.getCurrentPositionAsync({});
+        this.setState({ location });
+    };
+
+    componentWillMount() {
+        if (Platform.OS === "android" && !Constants.isDevice) {
+            this.setState({
+                error: true
+            });
+        } else {
+            this._getLocationAsync();
+        }
+    }
 
     render() {
         return (
@@ -79,17 +102,38 @@ export default class Home extends React.Component {
                     <View style={{flex: 0.25, alignItems: "center", justifyContent: "center"}}>
                         <Text style={{flex: 0.5, fontSize: 25}}> Tessssssssssssssst</Text>
                     </View>
-                    <View style={{flex: 0.5, alignItems: "center", justifyContent: "center"}}>
-                        <MapView style={{height: 200, margin: 40}} showsUserLocation={true}>
+                    <View style={{flex: 0.5}}>
+                        <MapView
+                            initialRegion={{
+                                latitude: 48.5523076,
+                                longitude: 7.7085868,
+                                latitudeDelta: 0.0122,
+                                longitudeDelta: 0.0122
+                            }}
+                            provider={MapView.PROVIDER_GOOGLE}
+                            ref={map => (this.map = map)}
+                            showsUserLocation={true}
+                            style={{ flex: 1 }}
+                            customMapStyle={mapStyle}
+                        >
+                            <MapView.Marker
+                                coordinate={{latitude: 48.5523076,longitude: 7.7085868}}
+                                onPress={() => {
+                                    this.refs.scrollView._component.scrollTo({
+                                        x: index * (CARD_WIDTH + 10),
+                                        y: 0,
+                                        animated: false
+                                    });
+                                }}
+                            />
                         </MapView>
                     </View>
                     <View style={{flex: 0.25, alignItems: "center", justifyContent: "center"}}>
                         <TouchableOpacity
                             onPress={this.text()}
-                            style={{   flex: 0.25,
+                            style={{flex: 0.5,
                                 backgroundColor: "#00e500",
-                                alignItems: "center",
-                                borderRadius: 50}}
+                                borderRadius: 5}}
                         >
                             <Text style={{alignItems: "center", justifyContent: "center", color: "white", fontSize: 25}}>
                                 Accepter le défi
