@@ -11,6 +11,7 @@ import {
   Dimensions
 } from "react-native";
 import ReductionImage from "../Shared/ReductionImage";
+import ReductionContent from "../Shared/ReductionContent";
 import CardModal from "../Shared/CardModal";
 import ModalLine from "../Shared/ModalLine";
 
@@ -142,7 +143,9 @@ export default class Challenge extends React.Component {
             </View>
           }
         >
-          <Text style={{ marginTop: 20 }}>OUIIII</Text>
+          <ReductionContent
+            closeModal={() => this.setState({ reductionModal: false })}
+          />
         </CardModal>
       </View>
     );
