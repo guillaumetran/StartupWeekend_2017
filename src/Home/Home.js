@@ -10,41 +10,18 @@ import {
   Image,
   Platform,
   Dimensions,
-  Button
 } from "react-native";
 import CardModal from "../Shared/CardModal";
 import ModalLine from "../Shared/ModalLine";
 import ReductionImage from "../Shared/ReductionImage";
-import { MapView, Constants, Location, Permissions } from "expo";
+import ReductionContent from "../Shared/ReductionContent";
 
 const { height, width } = Dimensions.get("window");
 
 export default class Home extends React.Component {
   state = {
-    reductionModal: false,
-    location: null
+    reductionModal: false
   };
-
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        error: true
-      });
-    }
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
-  };
-
-  componentWillMount() {
-    if (Platform.OS === "android" && !Constants.isDevice) {
-      this.setState({
-        error: true
-      });
-    } else {
-      this._getLocationAsync();
-    }
-  }
 
   render() {
     return (
@@ -92,95 +69,11 @@ export default class Home extends React.Component {
             </View>
           }
         >
-          <View
-            style={{
-              flex: 0.25,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Text style={{ flex: 0.5, fontSize: 25 }}>
-              Réaliser <Text style={{ fontWeight: "bold" }}>2km </Text>dans la{" "}
-              <Text style={{ fontWeight: "bold" }}>matiné </Text>
-            </Text>
-          </View>
-          <View style={styles.delimiter} />
-          <View
-            style={{
-              flex: 0.25,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <Text style={{ flex: 0.5, fontSize: 17 }}>
-              {" "}
-              Profiter de vos réductions au{" "}
-            </Text>
-            <Text
-              style={{
-                flex: 0.5,
-                fontSize: 17,
-                textDecorationLine: "underline"
-              }}
-            >
-              KFC rue du fort Geispolsheim{" "}
-            </Text>
-          </View>
-          <View style={{ flex: 0.5 }}>
-            <MapView
-              initialRegion={{
-                latitude: 48.5523076,
-                longitude: 7.7085868,
-                latitudeDelta: 0.0122,
-                longitudeDelta: 0.0122
-              }}
-              provider={MapView.PROVIDER_GOOGLE}
-              ref={map => (this.map = map)}
-              showsUserLocation={true}
-              style={{ flex: 1 }}
-              customMapStyle={mapStyle}
-            >
-              <MapView.Marker
-                coordinate={{ latitude: 48.5523076, longitude: 7.7085868 }}
-                onPress={() => {
-                  this.refs.scrollView._component.scrollTo({
-                    x: index * (CARD_WIDTH + 10),
-                    y: 0,
-                    animated: false
-                  });
-                }}
-              />
-            </MapView>
-          </View>
-          <View
-            style={{
-              flex: 0.25,
-              alignItems: "center",
-              justifyContent: "center"
-            }}
-          >
-            <TouchableOpacity
-              onPress={() => {
-                if (this.props.updateNotif) this.props.updateNotif();
-              }}
-              style={{
-                flex: 0.5,
-                backgroundColor: "#00e500",
-                borderRadius: 5
-              }}
-            >
-              <Text
-                style={{
-                  alignItems: "center",
-                  justifyContent: "center",
-                  color: "white",
-                  fontSize: 25
-                }}
-              >
-                Accepter le défi
-              </Text>
-            </TouchableOpacity>
-          </View>
+          {this.props.updateNotif ? (
+            <ReductionContent updateNotif={() => this.props.updateNotif()} />
+          ) : (
+            <ReductionContent />
+          )}
         </CardModal>
       </View>
     );
