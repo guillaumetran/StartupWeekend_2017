@@ -69,9 +69,9 @@ export default class Challenge extends React.Component {
             >
               {this.state.currentStepCount < 30 ? (
                 <ReductionImage
-                  image={require("../assets/images/kfc.jpg")}
-                  title="KFC"
-                  description="Jusqu'à -15% !"
+                  image={require("../assets/images/mezzo.png")}
+                  title="Mezzo Di pasta"
+                  description="Profitez d’1 maxi box au prix d’1 mini"
                   progress={this.state.currentStepCount * 3.5}
                   progressText={
                     this.state.currentStepCount > 30
@@ -81,8 +81,8 @@ export default class Challenge extends React.Component {
                 />
               ) : (
                 <ReductionImage
-                  image={require("../assets/images/kfc.jpg")}
-                  title="KFC"
+                  image={require("../assets/images/mezzo.png")}
+                  title="Mezzo Di pasta"
                   description="Défi terminé !"
                 />
               )}
@@ -103,9 +103,9 @@ export default class Challenge extends React.Component {
               onPress={() => this.setState({ reductionModal: true })}
             >
               <ReductionImage
-                image={require("../assets/images/kfc.jpg")}
+                image={require("../assets/images/frit.png")}
                 title="La Frituur"
-                description="Jusqu'à -25% !"
+                description="Black Friday 1 cornet acheté 1 cornet offert."
                 progress={
                   this.state.currentStepCount
                     ? this.state.currentStepCount / 5
@@ -135,9 +135,9 @@ export default class Challenge extends React.Component {
           backdropContent={
             <View style={{ flex: 0.24, backgroundColor: "transparent" }}>
               <ReductionImage
-                image={require("../assets/images/kfc.jpg")}
+                image={require("../assets/images/frit.png")}
                 date={true}
-                title="KFC"
+                title="La Frituur"
               />
             </View>
           }
