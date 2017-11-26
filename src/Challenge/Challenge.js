@@ -24,18 +24,11 @@ export default class Challenge extends React.Component {
     firstStep: true
   };
 
-  reward() {
-    if (this.state.firstStep && this.state.currentStepCount >= 50) {
-      this.setState({ reductionModal: true, firstStep: false });
-    }
-  }
-
   _subscribe = () => {
     this._subscription = Pedometer.watchStepCount(result => {
       this.setState({
         currentStepCount: result.steps
       });
-      this.reward();
     });
   };
 
