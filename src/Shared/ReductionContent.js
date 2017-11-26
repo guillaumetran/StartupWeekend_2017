@@ -50,8 +50,10 @@ export default class ReductionContent extends React.Component {
           >
             <View style={{ flex: 0.8 }}>
               <Text style={styles.description}>
-                Conditions : Offre valable du 16/09/2017 au 14/09/2017 Présenter
-                son défi validé dans l’établissement.
+                Conditions : Offre valable du 16/09/2017 au 14/09/2017
+              </Text>
+              <Text style={styles.description}>
+                Présenter son défi validé dans l’établissement.
               </Text>
             </View>
           </View>
@@ -105,6 +107,7 @@ export default class ReductionContent extends React.Component {
                 }}
                 onPress={() => {
                   if (this.props.updateNotif) this.props.updateNotif();
+                  this.props.closeModal();
                 }}
               >
                 <View

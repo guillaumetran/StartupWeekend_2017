@@ -67,17 +67,25 @@ export default class Challenge extends React.Component {
               activeOpacity={0.8}
               onPress={() => this.setState({ reductionModal: true })}
             >
-              <ReductionImage
-                image={require("../assets/images/kfc.jpg")}
-                title="KFC"
-                description="Jusqu'à -15% !"
-                progress={this.state.currentStepCount * 3.5}
-                progressText={
-                  this.state.currentStepCount > 30
-                    ? "30 pas / 30 pas"
-                    : this.state.currentStepCount + " pas / 30 pas"
-                }
-              />
+              {this.state.currentStepCount < 30 ? (
+                <ReductionImage
+                  image={require("../assets/images/kfc.jpg")}
+                  title="KFC"
+                  description="Jusqu'à -15% !"
+                  progress={this.state.currentStepCount * 3.5}
+                  progressText={
+                    this.state.currentStepCount > 30
+                      ? "30 pas / 30 pas"
+                      : this.state.currentStepCount + " pas / 30 pas"
+                  }
+                />
+              ) : (
+                <ReductionImage
+                  image={require("../assets/images/kfc.jpg")}
+                  title="KFC"
+                  description="Défi terminé !"
+                />
+              )}
             </TouchableOpacity>
           </View>
         </View>

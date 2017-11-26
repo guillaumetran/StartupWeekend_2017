@@ -17,6 +17,7 @@ import Loader from "../Shared/Loader";
 import ReductionImage from "../Shared/ReductionImage";
 import CardModal from "../Shared/CardModal";
 import ModalLine from "../Shared/ModalLine";
+import ReductionContent from "../Shared/ReductionContent";
 
 const { width, height } = Dimensions.get("window");
 const CARD_WIDTH = width * 0.75;
@@ -55,7 +56,7 @@ const reductions = [
 export default class AroundMe extends React.Component {
   state = {
     animation: new Animated.Value(0),
-      location: null,
+    location: null,
     index: 0,
     reductionModal: false,
     error: false,
@@ -167,7 +168,13 @@ export default class AroundMe extends React.Component {
           {reductions.map((item, index) => {
             return (
               <View key={index} style={styles.card}>
-                <View style={{ flex: 1, justifyContent: "center", alignContent: "center"}}>
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignContent: "center"
+                  }}
+                >
                   <View
                     style={{
                       flex: 0.95,
@@ -177,7 +184,7 @@ export default class AroundMe extends React.Component {
                   >
                     <TouchableOpacity
                       style={{ flex: 0.95 }}
-                      activeOpacity={0.8}
+                      activeOpacity={0.7}
                       onPress={() =>
                         this.setState({
                           reductionModal: true,
@@ -202,7 +209,7 @@ export default class AroundMe extends React.Component {
           isOpen={this.state.reductionModal}
           onClosed={() => this.setState({ reductionModal: false })}
           headerSize={0.25}
-          backdropOpacity={0.9}
+          backdropOpacity={0.7}
           header={
             <View style={{ flex: 0.25, backgroundColor: "transparent" }}>
               <ModalLine />
@@ -226,7 +233,16 @@ export default class AroundMe extends React.Component {
             </View>
           }
         >
-          <Text style={{ marginTop: 20 }}>OUIIII</Text>
+          {this.props.updateNotif ? (
+            <ReductionContent
+              updateNotif={() => this.props.updateNotif()}
+              closeModal={() => this.setState({ reductionModal: false })}
+            />
+          ) : (
+            <ReductionContent
+              closeModal={() => this.setState({ reductionModal: false })}
+            />
+          )}
         </CardModal>
       </View>
     );
