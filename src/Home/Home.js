@@ -10,6 +10,7 @@ import {
   Image,
   Platform,
   Dimensions,
+  ScrollView
 } from "react-native";
 import CardModal from "../Shared/CardModal";
 import ModalLine from "../Shared/ModalLine";
@@ -20,33 +21,74 @@ const { height, width } = Dimensions.get("window");
 
 export default class Home extends React.Component {
   state = {
-    reductionModal: false
+    reductionModal: false,
+    selectedRestaurant: null
   };
+
+  reductions = [
+    {
+      title: "Mezzo Di pasta",
+      description: "Profitez d’un maxi box au prix d’un mini",
+      image: require("../assets/images/mezzo.png")
+    },
+    {
+      title: "La Frituur",
+      description: "Black Friday 1 cornet acheté 1 cornet offert.",
+      image: require("../assets/images/frit.png")
+    },
+    {
+      title: "Subway",
+      description: "Profitez de 2 menus à 10 €",
+      image: require("../assets/images/subway.png")
+    },
+    {
+      title: "KFC",
+      description: "1000 pas 1 tenders !",
+      image: require("../assets/images/kfc.jpg")
+    }
+  ];
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={{ flex: 1, justifyContent: "center" }}>
-          <View
-            style={{
-              flex: 0.95,
-              justifyContent: "center",
-              flexDirection: "row"
-            }}
-          >
-            <TouchableOpacity
-              style={{ flex: 0.95 }}
-              activeOpacity={0.8}
-              onPress={() => this.setState({ reductionModal: true })}
-            >
-              <ReductionImage
-                image={require("../assets/images/kfc.jpg")}
-                title="KFC"
-                description="Jusqu'à -15% !"
-              />
-            </TouchableOpacity>
-          </View>
-        </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {this.reductions.map((item, index) => {
+            return (
+              <View
+                key={index}
+                style={{
+                  flex: 1,
+                  height: height / 3,
+                  justifyContent: "center"
+                }}
+              >
+                <View
+                  style={{
+                    flex: 0.95,
+                    justifyContent: "center",
+                    flexDirection: "row"
+                  }}
+                >
+                  <TouchableOpacity
+                    style={{ flex: 0.95 }}
+                    activeOpacity={0.8}
+                    onPress={() =>
+                      this.setState({
+                        selectedRestaurant: item,
+                        reductionModal: true
+                      })}
+                  >
+                    <ReductionImage
+                      image={item.image}
+                      title={item.title}
+                      description={item.description}
+                    />
+                  </TouchableOpacity>
+                </View>
+              </View>
+            );
+          })}
+        </ScrollView>
         <CardModal
           swipeArea={height / 3}
           swipeThreshold={50}
@@ -62,17 +104,30 @@ export default class Home extends React.Component {
           backdropContent={
             <View style={{ flex: 0.24, backgroundColor: "transparent" }}>
               <ReductionImage
-                image={require("../assets/images/kfc.jpg")}
+                image={
+                  this.state.selectedRestaurant
+                    ? this.state.selectedRestaurant.image
+                    : require("../assets/images/frit.png")
+                }
                 date={true}
-                title="KFC"
+                title={
+                  this.state.selectedRestaurant
+                    ? this.state.selectedRestaurant.title
+                    : "La Frituur"
+                }
               />
             </View>
           }
         >
           {this.props.updateNotif ? (
-            <ReductionContent updateNotif={() => this.props.updateNotif()} closeModal={() => this.setState({reductionModal: false})} />
+            <ReductionContent
+              updateNotif={() => this.props.updateNotif()}
+              closeModal={() => this.setState({ reductionModal: false })}
+            />
           ) : (
-            <ReductionContent closeModal={() => this.setState({reductionModal: false})} />
+            <ReductionContent
+              closeModal={() => this.setState({ reductionModal: false })}
+            />
           )}
         </CardModal>
       </View>
