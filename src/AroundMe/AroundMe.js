@@ -118,8 +118,8 @@ export default class AroundMe extends React.Component {
           initialRegion={{
             latitude: this.state.location.coords.latitude,
             longitude: this.state.location.coords.longitude,
-            latitudeDelta: 0.0122,
-            longitudeDelta: 0.0122
+            latitudeDelta: 0.1122,
+            longitudeDelta: 0.1122
           }}
           customMapStyle={mapStyle}
         >
@@ -127,6 +127,8 @@ export default class AroundMe extends React.Component {
             return (
               <MapView.Marker
                 key={index}
+                style={{ backgroundColor: "transparent" }}
+                image={require("../assets/images/marker.png")}
                 coordinate={item.coordinate}
                 onPress={() => {
                   this.refs.scrollView._component.scrollTo({
@@ -135,16 +137,7 @@ export default class AroundMe extends React.Component {
                     animated: false
                   });
                 }}
-              >
-                <Image
-                  source={require("../assets/images/marker.png")}
-                  style={{
-                    backgroundColor: "transparent",
-                    height: 60,
-                    width: 80
-                  }}
-                />
-              </MapView.Marker>
+              />
             );
           })}
         </MapView>
