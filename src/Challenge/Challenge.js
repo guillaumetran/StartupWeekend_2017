@@ -69,7 +69,7 @@ export default class Challenge extends React.Component {
             >
               {this.state.currentStepCount < 30 ? (
                 <ReductionImage
-                  image={require("../assets/images/mezzo.png")}
+                  image={require("../assets/images/mezzo.jpg")}
                   title="Mezzo Di pasta"
                   description="Profitez d’1 maxi box au prix d’1 mini"
                   progress={this.state.currentStepCount * 3.5}
@@ -81,7 +81,7 @@ export default class Challenge extends React.Component {
                 />
               ) : (
                 <ReductionImage
-                  image={require("../assets/images/mezzo.png")}
+                  image={require("../assets/images/mezzo.jpg")}
                   title="Mezzo Di pasta"
                   description="Défi terminé !"
                 />

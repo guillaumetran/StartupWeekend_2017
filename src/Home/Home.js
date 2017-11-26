@@ -29,7 +29,7 @@ export default class Home extends React.Component {
     {
       title: "Mezzo Di pasta",
       description: "Profitez d’un maxi box au prix d’un mini",
-      image: require("../assets/images/mezzo.png")
+      image: require("../assets/images/mezzo.jpg")
     },
     {
       title: "La Frituur",

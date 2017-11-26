@@ -27,7 +27,7 @@ const reductions = [
   {
     title: "Mezzo Di pasta",
     description: "Prix mini pour une maxi box",
-    image: require("../assets/images/mezzo.png"),
+    image: require("../assets/images/mezzo.jpg"),
     coordinate: {
       latitude: 48.5523076,
       longitude: 7.7085868
