@@ -53,7 +53,7 @@ export default class Home extends React.Component {
           isOpen={this.state.reductionModal}
           onClosed={() => this.setState({ reductionModal: false })}
           headerSize={0.25}
-          backdropOpacity={0.9}
+          backdropOpacity={0.7}
           header={
             <View style={{ flex: 0.25, backgroundColor: "transparent" }}>
               <ModalLine />
@@ -70,9 +70,9 @@ export default class Home extends React.Component {
           }
         >
           {this.props.updateNotif ? (
-            <ReductionContent updateNotif={() => this.props.updateNotif()} />
+            <ReductionContent updateNotif={() => this.props.updateNotif()} closeModal={() => this.setState({reductionModal: false})} />
           ) : (
-            <ReductionContent />
+            <ReductionContent closeModal={() => this.setState({reductionModal: false})} />
           )}
         </CardModal>
       </View>
