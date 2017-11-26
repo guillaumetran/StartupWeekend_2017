@@ -95,7 +95,7 @@ export default class Home extends React.Component {
                 >
                     <View style={{flex: 0.25, alignItems: "center", justifyContent: "center"}}>
                         <Text style={{flex: 0.5, fontSize: 25}} >
-                            Réaliser <Text style={{fontWeight: "bold"}}>2km </Text> dans la <Text style={{fontWeight: "bold"}} > matiné </Text>
+                            Réaliser <Text style={{fontWeight: "bold"}}>2km </Text>dans la <Text style={{fontWeight: "bold"}} >matiné </Text>
                         </Text>
                     </View>
                     <View style={styles.delimiter}/>
