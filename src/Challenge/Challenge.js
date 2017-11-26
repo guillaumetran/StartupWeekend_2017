@@ -71,11 +71,11 @@ export default class Challenge extends React.Component {
                 image={require("../assets/images/kfc.jpg")}
                 title="KFC"
                 description="Jusqu'à -15% !"
-                progress={this.state.currentStepCount * 2}
+                progress={this.state.currentStepCount * 3.5}
                 progressText={
-                  this.state.currentStepCount > 50
-                    ? "50 pas / 50 pas"
-                    : this.state.currentStepCount + " pas / 50 pas"
+                  this.state.currentStepCount > 30
+                    ? "30 pas / 30 pas"
+                    : this.state.currentStepCount + " pas / 30 pas"
                 }
               />
             </TouchableOpacity>
@@ -100,13 +100,13 @@ export default class Challenge extends React.Component {
                 description="Jusqu'à -25% !"
                 progress={
                   this.state.currentStepCount
-                    ? this.state.currentStepCount / 3
+                    ? this.state.currentStepCount / 5
                     : 0
                 }
                 progressText={
-                  this.state.currentStepCount > 300
-                    ? "300 pas / 300 pas"
-                    : this.state.currentStepCount + " pas / 300 pas"
+                  this.state.currentStepCount > 500
+                    ? "500 pas / 500 pas"
+                    : this.state.currentStepCount + " pas / 500 pas"
                 }
               />
             </TouchableOpacity>
