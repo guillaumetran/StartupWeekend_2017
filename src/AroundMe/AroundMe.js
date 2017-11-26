@@ -26,7 +26,7 @@ const CARD_HEIGHT = height / 4;
 const reductions = [
   {
     title: "Mezzo Di pasta",
-    description: "Profitez d’un maxi box au prix d’un mini",
+    description: "Prix mini pour une maxi box",
     image: require("../assets/images/mezzo.png"),
     coordinate: {
       latitude: 48.5523076,
@@ -35,7 +35,7 @@ const reductions = [
   },
   {
     title: "La Frituur",
-    description: "Black Friday 1 cornet acheté 1 cornet offert.",
+    description: "Black Friday 1 acheté = 1 offert",
     image: require("../assets/images/frit.png"),
     coordinate: {
       latitude: 48.5649829,
