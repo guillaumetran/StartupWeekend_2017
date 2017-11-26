@@ -8,12 +8,11 @@ import Home from "../Home/Home";
 import AroundMe from "../AroundMe/AroundMe";
 import Challenge from "../Challenge/Challenge";
 import Profile from "../Profile/Profile";
-import PedometerSensor from "../Pedometer/PedometerSensor";
 
 const pages = [
   { name: "Accueil", icon: "home", component: <Home /> },
   { name: "Proche", icon: "location-arrow", component: <AroundMe /> },
-  { name: "Défis", icon: "trophy", component: <PedometerSensor /> },
+  { name: "Défis", icon: "trophy", component: <Challenge /> },
   { name: "Profile", icon: "user", component: <Profile /> }
 ];
 

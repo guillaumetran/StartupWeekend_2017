@@ -4,9 +4,12 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
+import ProgressBar from "./ProgressBar";
 
-export default class Profile extends React.Component {
+export default class ReductionImage extends React.Component {
   render() {
+    let showProgress = false;
+    if (this.props.progress >= 0) showProgress = true;
     return (
       <Image
         style={{ height: "100%", width: "100%" }}
@@ -51,7 +54,7 @@ export default class Profile extends React.Component {
               style={{
                 flex: 0.5,
                 justifyContent: "space-between",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <View style={{ flex: 1, justifyContent: "center" }}>
@@ -59,6 +62,14 @@ export default class Profile extends React.Component {
               </View>
               {this.props.description ? (
                 <Text style={styles.description}>{this.props.description}</Text>
+              ) : (
+                <View />
+              )}
+              {showProgress ? (
+                <ProgressBar
+                  percentage={this.props.progress}
+                  progressText={this.props.progressText}
+                />
               ) : (
                 <View />
               )}

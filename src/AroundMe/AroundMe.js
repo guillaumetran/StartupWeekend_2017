@@ -9,7 +9,8 @@ import {
   Dimensions,
   Platform,
   Animated,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from "react-native";
 import { MapView, Constants, Location, Permissions } from "expo";
 import Loader from "../Shared/Loader";
@@ -57,7 +58,8 @@ export default class AroundMe extends React.Component {
     location: null,
     index: 0,
     reductionModal: false,
-    error: false
+    error: false,
+    selectedRestaurant: null
   };
 
   componentWillMount() {
@@ -133,7 +135,16 @@ export default class AroundMe extends React.Component {
                     animated: false
                   });
                 }}
-              />
+              >
+                <Image
+                  source={require("../assets/images/marker.png")}
+                  style={{
+                    backgroundColor: "transparent",
+                    height: 60,
+                    width: 80
+                  }}
+                />
+              </MapView.Marker>
             );
           })}
         </MapView>
@@ -173,7 +184,11 @@ export default class AroundMe extends React.Component {
                     <TouchableOpacity
                       style={{ flex: 0.95 }}
                       activeOpacity={0.8}
-                      onPress={() => this.setState({ reductionModal: true })}
+                      onPress={() =>
+                        this.setState({
+                          reductionModal: true,
+                          selectedRestaurant: item
+                        })}
                     >
                       <ReductionImage
                         image={item.image}
@@ -202,9 +217,17 @@ export default class AroundMe extends React.Component {
           backdropContent={
             <View style={{ flex: 0.24, backgroundColor: "transparent" }}>
               <ReductionImage
-                image={require("../assets/images/kfc.jpg")}
+                image={
+                  this.state.selectedRestaurant
+                    ? this.state.selectedRestaurant.image
+                    : require("../assets/images/kfc.jpg")
+                }
                 date={true}
-                title="KFC"
+                title={
+                  this.state.selectedRestaurant
+                    ? this.state.selectedRestaurant.title
+                    : "Nom restaurant"
+                }
               />
             </View>
           }
