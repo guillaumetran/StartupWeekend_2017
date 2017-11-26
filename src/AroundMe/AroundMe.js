@@ -44,7 +44,7 @@ const reductions = [
   {
     title: "Subway",
     description: "Profitez de 2 menus à 10 €",
-    image: require("../assets/images/kfc.jpg"),
+    image: require("../assets/images/subway.png"),
     coordinate: {
       latitude: 48.580594,
       longitude: 7.7323268
