@@ -95,12 +95,13 @@ export default class Home extends React.Component {
                 >
                     <View style={{flex: 0.25, alignItems: "center", justifyContent: "center"}}>
                         <Text style={{flex: 0.5, fontSize: 25}} >
-                            Text
+                            Réaliser <Text style={{fontWeight: "bold"}}>2km </Text> dans la <Text style={{fontWeight: "bold"}} > matiné </Text>
                         </Text>
                     </View>
                     <View style={styles.delimiter}/>
                     <View style={{flex: 0.25, alignItems: "center", justifyContent: "center"}}>
-                        <Text style={{flex: 0.5, fontSize: 25}}> Tessssssssssssssst</Text>
+                        <Text style={{flex: 0.5, fontSize: 17}}> Profiter de vos réductions au </Text>
+                        <Text style={{flex: 0.5, fontSize: 17, textDecorationLine: "underline"}}>KFC rue du fort Geispolsheim </Text>
                     </View>
                     <View style={{flex: 0.5}}>
                         <MapView
