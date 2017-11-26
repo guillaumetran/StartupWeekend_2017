@@ -24,18 +24,18 @@ const CARD_HEIGHT = height / 4;
 
 const reductions = [
   {
-    title: "KFC",
-    description: "Opération 1000 pas 1 tenders",
-    image: require("../assets/images/kfc.jpg"),
+    title: "Mezzo Di pasta",
+    description: "Profitez d’un maxi box au prix d’un mini",
+    image: require("../assets/images/mezzo.png"),
     coordinate: {
       latitude: 48.5523076,
       longitude: 7.7085868
     }
   },
   {
-    title: "Burger King",
-    description: "Opération 1000 pas 1 tenders",
-    image: require("../assets/images/kfc.jpg"),
+    title: "La Frituur",
+    description: "Black Friday 1 cornet acheté 1 cornet offert.",
+    image: require("../assets/images/frit.png"),
     coordinate: {
       latitude: 48.5649829,
       longitude: 7.7319789
@@ -43,7 +43,7 @@ const reductions = [
   },
   {
     title: "Subway",
-    description: "Opération 1000 pas 1 Sub",
+    description: "Profitez de 2 menus à 10 €",
     image: require("../assets/images/kfc.jpg"),
     coordinate: {
       latitude: 48.580594,
@@ -55,7 +55,7 @@ const reductions = [
 export default class AroundMe extends React.Component {
   state = {
     animation: new Animated.Value(0),
-    location: null,
+      location: null,
     index: 0,
     reductionModal: false,
     error: false,
@@ -104,6 +104,7 @@ export default class AroundMe extends React.Component {
     let location = await Location.getCurrentPositionAsync({});
     this.setState({ location });
   };
+
   render() {
     if (!this.state.location || this.state.error) {
       return <Loader />;
@@ -166,7 +167,7 @@ export default class AroundMe extends React.Component {
           {reductions.map((item, index) => {
             return (
               <View key={index} style={styles.card}>
-                <View style={{ flex: 1, justifyContent: "center" }}>
+                <View style={{ flex: 1, justifyContent: "center", alignContent: "center"}}>
                   <View
                     style={{
                       flex: 0.95,
