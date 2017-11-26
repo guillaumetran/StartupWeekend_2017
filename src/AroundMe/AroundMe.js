@@ -50,6 +50,15 @@ const reductions = [
       latitude: 48.580594,
       longitude: 7.7323268
     }
+  },
+  {
+    title: "KFC",
+    description: "1000 pas 1 tenders !",
+    image: require("../assets/images/kfc.jpg"),
+    coordinate: {
+      latitude: 48.520594,
+      longitude: 7.7323268
+    }
   }
 ];
 
